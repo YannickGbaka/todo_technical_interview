@@ -23,13 +23,13 @@ class Todo extends Model
     const LOW_PRIORITY = 3;
 
     // Function to retrieve the string associated to the priority of the task
-    public function getPriorityAttribute()
+    public function getPriorityAttribute($value)
     {
-        switch ($this->priority) {
+        switch ($value) {
             case Self::HIGH_PRIORITY:
                 return 'Elévé';
             case Self::MEDIUM_PRIORITY:
-                return 'Normale';
+                return 'Moyenne';
             case Self::LOW_PRIORITY:
                 return 'Faible';
         }
