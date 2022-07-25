@@ -18,7 +18,7 @@ class CreateTodosTable extends Migration
             $table->string('task');
             $table->tinyInteger('priority');
             $table->boolean('state')->default(0);
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
