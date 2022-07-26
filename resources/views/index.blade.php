@@ -27,8 +27,7 @@
                                 </button>
                             </div>
                         @endif
-                        <div class="card-body" style="position: relative; height: 400px">
-
+                        <div class="card-body">
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
@@ -62,15 +61,15 @@
                                                     <span
                                                         class="badge badge-pill 
                                                     @switch($todo->priority) @case('Elévé')
-badge-danger
-@break
+                                                badge-danger
+                                                @break
 
-@case('Moyenne')
-badge-warning
-@break
+                                                @case('Moyenne')
+                                                badge-warning
+                                                @break
 
-@case('Faible')
-badge-info
+                                                @case('Faible')
+                                                badge-info
                                                         @break @endswitch">
                                                         {{ $todo->priority }}
                                                     </span>
@@ -102,8 +101,8 @@ badge-info
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
+
                         <div class="card-footer text-end p-3">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#addTodoModal">Ajouter
                                 une tâche</button>
