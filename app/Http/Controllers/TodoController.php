@@ -109,6 +109,24 @@ class TodoController extends Controller
         return back()->with('task_updating', 'La tâche a été mise à jour avec succès');
     }
 
+    public function completeTask(Request $request)
+    {
+        $rules = [
+            'task_id' => 'required|int',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $todo = Todo::findOrFail($request->task_id);
+        $todo->state = !$todo->state;
+        $todo->save();
+
+        return back()->with('task_updating', 'La tâche a été mise à jour avec succès');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

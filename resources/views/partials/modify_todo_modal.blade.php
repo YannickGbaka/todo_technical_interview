@@ -48,8 +48,8 @@
                     <input type="hidden" name="task_id" id="task_id">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">
-                            Créer
-                            <i class="fa-solid fa-square-plus"></i> </button>
+                            Modifer
+                            <i class="fas fa-edit"></i> </button>
                     </div>
                 </form>
             </div>

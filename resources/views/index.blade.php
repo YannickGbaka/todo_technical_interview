@@ -42,10 +42,20 @@
                                     @foreach ($todos as $todo)
                                         <tr class="fw-normal">
 
-                                            <td class="align-middle  border-0 rounded" style="background-color: #f4f6f7;">
-                                                <input class="form-check-input me-2" type="checkbox" value=""
-                                                    aria-label="..." /><span>
-                                                    {{ $todo->task }}</span>
+                                            <td class="align-middle ">
+                                                <form action="{{ route('todos.change_state') }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-secondary"
+                                                        @if ($todo->state == true) checked @endif aria-label="...">
+                                                        <i class="fa-solid fa-check-double text-success"></i>
+                                                    </button>
+                                                    @if ($todo->state == true)
+                                                        <s>{{ $todo->task }}</s>
+                                                    @else
+                                                        <span>{{ $todo->task }}</span>
+                                                    @endif
+                                                    <input type="hidden" name="task_id" value="{{ $todo->id }}">
+                                                </form>
                                             </td>
                                             <td class="align-middle">
                                                 <h6 class="mb-0">
@@ -80,9 +90,10 @@ badge-info
                                                     @method('DELETE')
                                                     <a href="#!" data-toggle="modal" data-task="{{ $todo->task }}"
                                                         data-priority="{{ $todo->priority }}"
-                                                        data-state="{{ $todo->state }}" data-task_id="{{ $todo->id }}"
-                                                        data-target="#modifyTodoModal" class="btn updateTodo"
-                                                        title="Done"><i class="fas fa-edit text-primary "></i></a>
+                                                        data-state="{{ $todo->state }}"
+                                                        data-task_id="{{ $todo->id }}" data-target="#modifyTodoModal"
+                                                        class="btn updateTodo" title="Done"><i
+                                                            class="fas fa-edit text-primary "></i></a>
                                                     <button type="submit" title="Remove" class="btn"><i
                                                             class="fas fa-trash-alt text-warning"></i></button>
                                                 </form>
