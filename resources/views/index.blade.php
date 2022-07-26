@@ -12,8 +12,16 @@
                             <h5 class="mb-0"><i class="fas fa-tasks me-2 mx-2"></i>Liste tâches à accomplir</h5>
                         </div>
                         @if (Session::has('task_creation'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Tâche crée 🎉</strong> La création de la tâche a réussie
+                            <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                                <strong>Tâche crée 🎉</strong> {{ Session::get('task_creation') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if (Session::has('task_updating'))
+                            <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                                <strong>Tâche mise à jour 🎉</strong> {{ Session::get('task_creation') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -35,8 +43,9 @@
                                         <tr class="fw-normal">
 
                                             <td class="align-middle  border-0 rounded" style="background-color: #f4f6f7;">
-                                                <span> <input class="form-check-input me-2" type="checkbox" value=""
-                                                        aria-label="..." />{{ $todo->task }}</span>
+                                                <input class="form-check-input me-2" type="checkbox" value=""
+                                                    aria-label="..." /><span>
+                                                    {{ $todo->task }}</span>
                                             </td>
                                             <td class="align-middle">
                                                 <h6 class="mb-0">
@@ -65,11 +74,15 @@ badge-info
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <form method="POST" action="{{ route('todos.delete', $todo->id) }}">
+                                                <form method="POST" class="inline-block"
+                                                    action="{{ route('todos.delete', $todo->id) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button href="#!" class="btn" title="Done"><i
-                                                            class="fas fa-edit text-primary "></i></button>
+                                                    <a href="#!" data-toggle="modal" data-task="{{ $todo->task }}"
+                                                        data-priority="{{ $todo->priority }}"
+                                                        data-state="{{ $todo->state }}" data-task_id="{{ $todo->id }}"
+                                                        data-target="#modifyTodoModal" class="btn updateTodo"
+                                                        title="Done"><i class="fas fa-edit text-primary "></i></a>
                                                     <button type="submit" title="Remove" class="btn"><i
                                                             class="fas fa-trash-alt text-warning"></i></button>
                                                 </form>
@@ -91,6 +104,7 @@ badge-info
         </div>
     </section>
     @include('partials.add_todo_modal')
+    @include('partials.modify_todo_modal')
 @endsection
 
 

@@ -85,9 +85,28 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'task' => 'required|string|min:3',
+            'priority' => 'required',
+            'state' => 'required|min:0|max:1'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $todo = Todo::findOrFail($request->task_id);
+        $todo->task = $request->task;
+        $todo->priority = $request->priority;
+        $todo->state = $request->state;
+
+        $todo->save();
+
+        return back()->with('task_updating', 'La tâche a été mise à jour avec succès');
     }
 
     /**
