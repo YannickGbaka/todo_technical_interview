@@ -65,10 +65,14 @@ badge-info
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#!" data-mdb-toggle="tooltip" title="Done"><i
-                                                        class="fas fa-edit text-primary me-3 mx-2"></i></a>
-                                                <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
-                                                        class="fas fa-trash-alt text-warning"></i></a>
+                                                <form method="POST" action="{{ route('todos.delete', $todo->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button href="#!" class="btn" title="Done"><i
+                                                            class="fas fa-edit text-primary "></i></button>
+                                                    <button type="submit" title="Remove" class="btn"><i
+                                                            class="fas fa-trash-alt text-warning"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
