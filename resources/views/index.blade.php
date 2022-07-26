@@ -21,12 +21,21 @@
                         @endif
                         @if (Session::has('task_updating'))
                             <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
-                                <strong>Tâche mise à jour 🎉</strong> {{ Session::get('task_creation') }}
+                                <strong>Tâche mise à jour 🎉</strong> {{ Session::get('task_updating') }}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                         @endif
+                        @if (Session::has('task_deleted'))
+                            <div class="alert alert-success alert-dismissible fade show m-2" role="alert">
+                                <strong>Suppression de la tâche 🗑️</strong> {{ Session::get('task_deleted') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+
                         <div class="card-body">
                             <table class="table mb-0">
                                 <thead>

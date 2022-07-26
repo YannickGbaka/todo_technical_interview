@@ -138,6 +138,6 @@ class TodoController extends Controller
         $todo = Todo::findOrFail($id);
         $todo->delete();
 
-        return back()->with('La tâche a été supprimé avec succès');
+        return back()->with('task_deleted', 'La tâche a été supprimé avec succès');
     }
 }
