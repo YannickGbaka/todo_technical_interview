@@ -18,8 +18,11 @@ $(document).on('click', '.updateTodo', function(){
             $('#priority_modified').val("3").change();
             break;
     }
-    console.log(state);
-    $('#state_modified').val(state).change();
+    if(state == ""){
+        $('#state_modified').val("0").change();
+    }else{
+        $('#state_modified').val("1").change();
+    }
 
     $('#task_id').val(taskId);
 
