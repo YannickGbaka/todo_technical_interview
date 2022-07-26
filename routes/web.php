@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TodoController::class, 'index']);
 Route::get('todos', [TodoController::class, 'index']);
+Route::post('todos', [TodoController::class, 'create'])->name('todos.create');

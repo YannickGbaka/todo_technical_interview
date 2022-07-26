@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller
 {
@@ -23,9 +24,25 @@ class TodoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $rules = [
+            'task' => 'required|string|min:3',
+            'priority' => 'required'
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        Todo::create([
+            'task' => $request->task,
+            'priority' => $request->priority
+        ]);
+
+        return back()->with('task_creation', 'La tâche a été crée avec succès');
     }
 
     /**

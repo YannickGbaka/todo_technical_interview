@@ -34,4 +34,9 @@ class Todo extends Model
                 return 'Faible';
         }
     }
+
+    // public function getStateAttribute($value)
+    // {
+    //     return $value == true ? 'Terminé' : 'En cours';
+    // }
 }
